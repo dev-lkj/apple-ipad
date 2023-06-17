@@ -1,4 +1,5 @@
 import ipads from '../data/ipads.js';
+import navigations from '../data/navigations.js';
 
 
 // 장바구니 드롭다운 메뉴 영역
@@ -133,4 +134,34 @@ ipads.forEach(function (ipad) {
 
     itemsEl.append(itemEl);
 });
-console.log(ipads);
+
+
+
+// Footer 네비게이션 영역
+const navigationsEl = document.querySelector('.footer .navigations');
+navigations.forEach(function (nav) {
+    const mapEl = document.querySelector('div');
+    mapEl.classList.add('map');
+
+    let mapList = '';
+    nav.maps.forEach(function (map) {
+        mapList += /* html*/ `<li>
+        <a href="${map.url}">${map.name}</a>
+        </li>`
+    });
+
+    mapEl.innerHTML = /* html */ `
+    <h3>
+        <span class="text">${nav.title}</span>
+    </h3>
+    <ul>
+        ${mapList}
+    </ul>
+    `
+    navigationsEl.append(mapEl);
+});
+
+
+// Footer Copyright 영역 ThisYear 작성하기
+const thisYearEl = document.querySelector('span.this-year');
+thisYearEl.textContent = new Date().getFullYear();
